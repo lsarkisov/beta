@@ -2,7 +2,6 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Auth
+## Beta
 
-    login: test@gmail.com
-    password: MyPassword_123
+    your secret code: my_secret_code
