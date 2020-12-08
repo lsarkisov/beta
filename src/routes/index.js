@@ -5,6 +5,7 @@ import {
   Switch,
   Route,
   Redirect,
+  useHistory,
 } from 'react-router-dom'
 import NoMatch from 'components/no-match'
 import Beta from 'components/beta'
@@ -30,21 +31,13 @@ function Routes() {
     localStorage.getItem('auth'),
   )
   const { response } = useSelector((state) => state.beta)
+  const history = useHistory()
 
   useEffect(() => {
     if (response && response.success === 'ok') {
       setIsAuthenticated('auth')
     }
   }, [response, setIsAuthenticated])
-
-  useEffect(() => {
-    window.addEventListener('storage', () => {
-      const auth = localStorage.getItem('auth')
-      if (isAuthenticated !== auth) {
-        setIsAuthenticated(auth)
-      }
-    })
-  }, [isAuthenticated, setIsAuthenticated])
 
   return (
     <Router>

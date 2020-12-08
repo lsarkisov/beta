@@ -8,9 +8,9 @@ function Secret() {
   const dispatch = useDispatch()
 
   const onClick = () => {
-    history.push('/')
     localStorage.removeItem('auth')
     dispatch(onLogOutAction())
+    history.push('/')
   }
 
   return (
