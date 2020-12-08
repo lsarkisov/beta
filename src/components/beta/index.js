@@ -20,6 +20,9 @@ function Beta() {
       localStorage.setItem('auth', 'auth')
       history.push('/secret/home')
     }
+    if (localStorage.getItem('auth')) {
+      history.push('/secret/home')
+    }
   }, [response, history])
 
   const onChange = (e) => {
