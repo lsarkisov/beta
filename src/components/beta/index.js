@@ -18,11 +18,13 @@ function Beta() {
   }, [history])
 
   useEffect(() => {
-    if (response && response.success === 'ok') {
-      if (!localStorage.getItem('auth')) {
-        history.push('/secret/home')
-        localStorage.setItem('auth', 'auth')
-      }
+    if (
+      response &&
+      response.success === 'ok' &&
+      !localStorage.getItem('auth')
+    ) {
+      localStorage.setItem('auth', 'auth')
+      history.push('/secret/home')
     }
   }, [response, history])
 
