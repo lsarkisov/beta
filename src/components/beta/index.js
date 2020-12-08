@@ -12,12 +12,6 @@ function Beta() {
   const { response } = useSelector((state) => state.beta)
 
   useEffect(() => {
-    if (localStorage.getItem('auth') === 'auth') {
-      history.push('/secret/home')
-    }
-  }, [history])
-
-  useEffect(() => {
     if (
       response &&
       response.success === 'ok' &&

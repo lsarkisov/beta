@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-  useHistory,
 } from 'react-router-dom'
 import NoMatch from 'components/no-match'
 import Beta from 'components/beta'
 import Secret from 'components/secret'
+import { onLogOutAction } from 'actions/logout'
 
 const PublicRoute = ({ component, ...rest }) => {
   const routeComponent = (props) => React.createElement(component, props)
@@ -31,13 +31,22 @@ function Routes() {
     localStorage.getItem('auth'),
   )
   const { response } = useSelector((state) => state.beta)
-  const history = useHistory()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (response && response.success === 'ok') {
       setIsAuthenticated('auth')
     }
   }, [response, setIsAuthenticated])
+
+  useEffect(() => {
+    window.addEventListener('storage', () => {
+      if (!localStorage.getItem('auth')) {
+        dispatch(onLogOutAction())
+        setIsAuthenticated(false)
+      }
+    })
+  }, [isAuthenticated, setIsAuthenticated, dispatch])
 
   return (
     <Router>
